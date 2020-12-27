@@ -1,5 +1,7 @@
 package com.study.demo.test;
 
+import java.util.Arrays;
+
 public class TestOrder {
     public static void main(String[] args){
         System.out.println("----第一次构造child----");
@@ -27,6 +29,8 @@ public class TestOrder {
         子类普通造方法
          */
     }
+
+
 
 }
 class Parent{
