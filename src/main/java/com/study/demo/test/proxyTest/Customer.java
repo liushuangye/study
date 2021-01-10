@@ -2,6 +2,7 @@ package com.study.demo.test.proxyTest;
 
 import com.study.demo.test.proxyTest.impl.ProxyMovie;
 import com.study.demo.test.proxyTest.impl.RealMovie;
+import org.springframework.cglib.proxy.Enhancer;
 
 public class Customer {
     public static void main(String[] args) {
@@ -18,10 +19,20 @@ public class Customer {
         IMovie proxyMovie = new ProxyMovie(realMovie);
         seeMovie(proxyMovie);
 
-        System.out.println("-----------动态代理-------------");
+        System.out.println("-----------JDK动态代理-------------");
         DynProxy proxy = new DynProxy(realMovie);
         IMovie movieDynProxy = proxy.getProxy();
         seeMovie(movieDynProxy);
+
+        System.out.println("-----------CGLib动态代理-------------");
+        CgLibProxy cglibProxy = new CgLibProxy();
+        //动态代理使用asm框架产生代理
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(RealMovie.class);
+        enhancer.setCallback(cglibProxy);
+        IMovie movieCgLib = (IMovie) enhancer.create();
+        seeMovie(movieCgLib);
+
     }
     public static void seeMovie(IMovie movie){
         movie.play();
