@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -77,9 +74,9 @@ public class StreamTest {
         //sort(Comparator)，如果不给参数则需要被比较的对象本身有比较器
         Pattern.compile(",").splitAsStream("1,22,333,4444,55555").sorted((x,y)->x.length()-y.length()).forEach(i -> System.out.println(i));
     }
+    /** 各种终止流的操作 */
     @Test
     public void fun2(){
-        /** 各种终止流的操作 */
         Stream<String> stream = Pattern.compile(",").splitAsStream("AB,AC,ARFDB,1,3,5,7,333");
         Optional<String> rt = stream.filter(x -> x.startsWith("A"))
 //                .max(String::compareToIgnoreCase);
@@ -94,6 +91,35 @@ public class StreamTest {
 //                .allMatch(x->x.startsWith("A"));//全部符合
                 .noneMatch(x->x.startsWith("A"));//没有符合
         System.out.println(flg);
+
+
+        //3.
+    }
+    /** 收集结果 */
+    @Test
+    public void fun3(){
+        Stream<String> stream = Pattern.compile(",").splitAsStream("AB,AC,ARFDB,1,3,5,7,333");
+        stream = Pattern.compile(",").splitAsStream("AB,AC,AD,1,3,5,7");
+        //1.通过iterator来收集，返回一个迭代器
+        Iterator<String> iterator = stream.iterator();
+        //2.通过forEach来，收集并将syso等函数应用于每个元素
+        stream.forEach(i -> System.out.println(i));
+        //3.通过toArray()，返回数组
+        Object[] objects = stream.toArray();//返回Obj的数组
+        Person[] strings = stream.toArray(Person[]::new);//要指定返回数组的类型需要传递到数组构造器中
+        //4.通过collect(),该方法返回一个实现了Collector接口的实例
+        List<String> collectList = stream.collect(Collectors.toList());
+        Set<String> collectSet = stream.collect(Collectors.toSet());
+        Person[] personArr = {new Person(),new Person()};
+        List<Person> personList = Arrays.stream(personArr).collect(Collectors.toList());//这里返回的是List<Person> , 因为 .stream(personArr) 返回的是Stream<Person>
+        TreeSet<String> collect = stream.collect(Collectors.toCollection(TreeSet::new));//通过构造器可以返回指定类型的集合
+        //5.使用summarizing(Int|Long|Double),对数据类型的流进行归总,SummaryStatistics对象包含 count max min average 等信息
+        int[] intArr = {1,2,3,4,5,6};
+        IntSummaryStatistics intSummaryStatistics = Arrays.stream(intArr).summaryStatistics();
+        intSummaryStatistics.getAverage();
+        intSummaryStatistics.getMax();
+        //6.将流中的元素拼接起来
+        String str = stream.collect(Collectors.joining(","));//AB,AC,AD,1,3,5,7   joining还可指定前后缀，前后缀是在结果串的前后，而非每个元素前后
 
     }
 }
