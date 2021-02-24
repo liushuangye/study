@@ -92,3 +92,11 @@ Function<Integer, Integer> h = f.andThen(g);
 int result = h.apply(1); 
 // 结果返回4
 ```
+
+#### 调用类/实例方法
+```
+引用对象的实例方法	Object::instanceMethodName
+引用类的静态方法	ClassName::staticMethodName
+引用类的实例方法	ClassName::methodName
+引用构造方法	ClassName::new
+```
