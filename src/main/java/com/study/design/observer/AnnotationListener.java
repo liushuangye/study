@@ -1,4 +1,4 @@
-package com.design.observer;
+package com.study.design.observer;
 
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;

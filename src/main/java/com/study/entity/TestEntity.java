@@ -1,10 +1,10 @@
-package com.entity;
+package com.study.entity;
 
-import javax.persistence.Entity;
+import org.springframework.stereotype.Repository;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name = "T_TEST_ENTITY")
+@Repository
 public class TestEntity {
     private Integer id;
     private String name;

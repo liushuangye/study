@@ -1,5 +1,6 @@
-package com.design.observer;
+package com.study.design.observer;
 
+import com.study.StudyApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = com.SpringBootMainClassApplication.class)
+@SpringBootTest(classes = StudyApplication.class)
 @WebAppConfiguration
 public class MyEventTest {
     @Autowired

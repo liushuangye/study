@@ -1,7 +1,7 @@
-package com.mapper;
+package com.study.mapper;
 
 
-import com.entity.TestEntity;
+import com.study.entity.TestEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

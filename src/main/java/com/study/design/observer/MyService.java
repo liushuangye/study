@@ -1,4 +1,4 @@
-package com.design.observer;
+package com.study.design.observer;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
